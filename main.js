@@ -22,9 +22,9 @@
 
 // turn off console logging in production
 // TODO come up with better way of doing this with webpack + env vars
-if (location.hostname !== 'localhost') {
-  console.log = console.info = console.debug = console.error = function () {};
-}
+// if (location.hostname !== 'localhost') {
+//   console.log = console.info = console.debug = console.error = function () {};
+// }
 
 var GATEKEEPER_KEY = '82fe014b6575b8c38b44235580bc8b11';
 
@@ -1058,6 +1058,7 @@ Mapboard.default({
               {
                 label: 'OPA Account #',
                 value: function(state) {
+                  console.log('state:', state);
                   return state.geocode.data.properties.opa_account_num;
                 }
               },
