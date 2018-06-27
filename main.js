@@ -180,6 +180,7 @@ mapboard.default({
     left: 0,
     right: 0,
   },
+  gatekeeperKey: GATEKEEPER_KEY,
   map: {
     // possibly should move to base config
     defaultBasemap: 'pwd',
