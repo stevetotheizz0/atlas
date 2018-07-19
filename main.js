@@ -158,11 +158,8 @@ function getVacancyText(state) {
 // configure accounting.js
 accounting.settings.currency.precision = 0;
 
-// mapboard({
-// Mapboard.default({
 mapboard.default({
-  // DEV
-  // defaultAddress: '1234 MARKET ST',
+  addressInputLocation: 'map',
   router: {
     enabled: true
   },
@@ -170,7 +167,7 @@ mapboard.default({
     enabled: false
   },
   addressAutocomplete: {
-    enabled: false
+    enabled: true
   },
   rootStyle: {
     position: 'absolute',
