@@ -207,7 +207,7 @@ export default {
           {
             label: 'Recycling Diversion Rate',
             value: function(state) {
-              return  state.geocode.data.properties.recycling_diversion_rate * 100 +'%';
+              return  (state.geocode.data.properties.recycling_diversion_rate * 100).toFixed(1) +'%';
             },
           },
           {
