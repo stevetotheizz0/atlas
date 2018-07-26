@@ -42,6 +42,7 @@ import zoningAppeals from './data-sources/zoning-appeals';
 import zoningBase from './data-sources/zoning-base';
 import zoningDocs from './data-sources/zoning-docs';
 import zoningOverlay from './data-sources/zoning-overlay';
+import propertyinfodata from './data-sources/property-info';
 
 // Topics
 import property from './topics/property';
@@ -52,6 +53,7 @@ import zoning from './topics/zoning';
 // import polling from './topics/polling';
 // import rco from './topics/rco';
 import nearby from './topics/nearby';
+import propertyinfo from './topics/propertyinfo';
 
 // styles
 // TODO move all styles here (that have a npm package)
@@ -133,6 +135,7 @@ mapboard({
     zoningBase,
     zoningDocs,
     zoningOverlay,
+    propertyinfodata
   },
   topics: [
     property,
@@ -142,6 +145,7 @@ mapboard({
     zoning,
     // polling,
     // rco,
-    nearby
+    nearby,
+    propertyinfo
   ],
 });
