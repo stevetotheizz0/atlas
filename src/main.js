@@ -28,21 +28,26 @@ import crimeIncidents from './data-sources/crime-incidents';
 import divisions from './data-sources/divisions';
 import dorCondoList from './data-sources/dor-condo-list';
 import dorDocuments from './data-sources/dor-documents';
-import elections from './data-sources/elections';
+// import elections from './data-sources/elections';
 import liBusinessLicenses from './data-sources/li-business-licenses';
 import liInspections from './data-sources/li-inspections';
 import liPermits from './data-sources/li-permits';
 import liViolations from './data-sources/li-violations';
 import nearbyZoningAppeals from './data-sources/nearby-zoning-appeals';
 import opa from './data-sources/opa';
-import rco from './data-sources/rco';
+//import rco from './data-sources/rco';
 import regmaps from './data-sources/regmaps';
 import vacantIndicatorsPoints from './data-sources/vacant-indicator-points';
 import zoningAppeals from './data-sources/zoning-appeals';
 import zoningBase from './data-sources/zoning-base';
 import zoningDocs from './data-sources/zoning-docs';
 import zoningOverlay from './data-sources/zoning-overlay';
-import propertyinfodata from './data-sources/property-info';
+//import airquality from './data-sources/airquality';
+//import hist_designated from './data-sources/historic';
+//import historicNearby from './data-sources/historic-nearby';
+
+// unreleased data sources
+
 
 // Topics
 import property from './topics/property';
@@ -50,10 +55,17 @@ import condos from './topics/condos';
 import deeds from './topics/deeds';
 import li from './topics/li';
 import zoning from './topics/zoning';
-// import polling from './topics/polling';
-// import rco from './topics/rco';
+//import polling from './topics/polling';
+//import rco from './topics/rco';
 import nearby from './topics/nearby';
-import propertyinfo from './topics/propertyinfo';
+//import historic from './topics/historic';
+import business from './topics/business';
+import schoolinfo from './topics/schoolinfo';
+import safetyinfo from './topics/publicsafety';
+//import politicalinfo from './topics/political';
+import trashday from './topics/trash';
+import environment from './topics/environment';
+
 
 // styles
 // TODO move all styles here (that have a npm package)
@@ -63,7 +75,6 @@ import 'leaflet-measure/dist/leaflet-measure.css';
 // REVIEW not sure why the hard path is necessary for vector icon
 // REVIEW the vector icons seem to be working without this - why?
 // import '../node_modules/@cityofphiladelphia/mapboard/node_modules/leaflet-vector-icon/dist/leaflet-vector-icon.css';
-
 // turn off console logging in production
 // TODO come up with better way of doing this with webpack + env vars
 const { hostname='' } = location;
@@ -88,8 +99,9 @@ mapboard({
   geolocation: {
     enabled: false
   },
-  addressAutocomplete: {
-    enabled: false
+  addressInputLocation: 'map',
+  addressInput: {
+    autocompleteEnabled: false
   },
   rootStyle: {
     position: 'absolute',
@@ -106,12 +118,12 @@ mapboard({
   imageOverlayGroups,
   legendControls,
   cyclomedia: {
-    enabled: true,
+    enabled: false,
     measurementAllowed: false,
     popoutAble: true,
   },
   pictometry: {
-    enabled: true,
+    enabled: false,
   },
   transforms,
   greeting,
@@ -122,21 +134,23 @@ mapboard({
     divisions,
     dorCondoList,
     dorDocuments,
-    elections,
+    //elections,
+    //hist_designated,
     liBusinessLicenses,
     liInspections,
     liPermits,
     liViolations,
     nearbyZoningAppeals,
     opa,
-    rco,
+    //rco,
     regmaps,
     vacantIndicatorsPoints,
     zoningAppeals,
     zoningBase,
     zoningDocs,
     zoningOverlay,
-    propertyinfodata
+    //airquality,
+    //historicNearby
   },
   topics: [
     property,
@@ -146,7 +160,13 @@ mapboard({
     zoning,
     // polling,
     // rco,
-    nearby,
-    propertyinfo
+    business,
+    // historic,
+    environment,
+    schoolinfo,
+    safetyinfo,
+    trashday,
+    // politicalinfo,
+    nearby
   ],
 });
