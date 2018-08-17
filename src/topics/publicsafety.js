@@ -1,5 +1,5 @@
 export default {
-  key: 'safetyinfo',
+  key: 'safetyInfo',
   icon: 'star',
   label: 'Public Safety',
 

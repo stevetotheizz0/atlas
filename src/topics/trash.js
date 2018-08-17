@@ -1,5 +1,5 @@
 export default {
-  key: 'trashday',
+  key: 'trashDay',
   icon: 'trash-alt',
   label: 'Trash & Recycling',
 

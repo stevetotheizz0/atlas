@@ -2,7 +2,7 @@ export default {
   key: 'business',
   icon: 'briefcase',
   label: 'Business',
-  dataSources: [],
+  dataSources: ['businessArea', 'redevelopmentArea'],
 
   components: [
     {
@@ -26,28 +26,64 @@ export default {
           },
           {
             label: 'Market Area Representative',
-            value: function() {
-              return ("<a><b>Joey McJoeJoe</b></a> <br> \
+            value: function(state) {
+              return ('<a href="https://www.phila.gov/commerce/pages/default.aspx" target="_blank"><b> ' + state.sources.businessArea.data[0].properties.MANAGER + '</b></a> <br> \
               Senior Somthing Something<br> \
-              (215) 555-0555 <br>")
+              (215) 555-0555 <br>')
             }
           },
           {
             label: 'Keystone Opportunity Zone',
-            value: function() {
-              return ("Not eligible")
+            value: function(state) {
+              if (state.sources.keystoneZone.data) {
+                if (state.sources.keystoneZone.data.length > 0) {
+                  return "Eligible" } else {
+                  return "Not Eligible"
+                }
+              } else {
+                return "Not Eligible"
+              }
             }
           },
           {
-            label: 'Blight Redevelopment Zone',
-            value: function() {
-              return ("Not eligible")
+            label: 'Redevelopment Certified Area',
+            value: function(state) {
+              if(state.sources.redevelopmentArea.data){
+                if(state.sources.redevelopmentArea.data.length > 0) {
+                  var date;
+                  if(state.sources.redevelopmentArea.data[0].properties.RECERT4 != null) {
+                    date = state.sources.redevelopmentArea.data[0].properties.RECERT4 } else
+                  if(state.sources.redevelopmentArea.data[0].properties.RECERT3 != null) {
+                    date = state.sources.redevelopmentArea.data[0].properties.RECERT3 } else
+                  if(state.sources.redevelopmentArea.data[0].properties.RECERT2 != null) {
+                    date = state.sources.redevelopmentArea.data[0].properties.RECERT2 } else
+                  if(state.sources.redevelopmentArea.data[0].properties.RECERT1 != null) {
+                    date = state.sources.redevelopmentArea.data[0].properties.RECERT1 } else
+                  if(state.sources.redevelopmentArea.data[0].properties.YEAR) {
+                    date = state.sources.redevelopmentArea.data[0].properties.YEAR } else {
+                    date = "Not Applicable"
+                  };
+                  return ( state.sources.redevelopmentArea.data[0].properties.NAME +"<br>" +
+                          date )
+                } else {
+                  return "Not Applicable"
+                }
+              } else {
+                return "Not Applicable"
+              }
             }
           },
           {
-            label: 'Tobacco-Free School Zone',
-            value: function() {
-              return ("Eligible - Apply for a permit <a>here</a>")
+            label: 'Tobacco Restrictions',
+            value: function(state) {
+              if(state.sources.tobacco.data != null) {
+                if(state.sources.tobacco.data.length > 0) {
+                  return "Tobacco-Free School Zone" } else {
+                  return "Eligible - Apply for a permit <a>here</a>"
+                }
+              } else {
+                return "Eligible - Apply for a permit <a>here</a>"
+              }
             }
           },
           {

@@ -2,7 +2,7 @@ export default {
   key: 'historic',
   icon: 'archway',
   label: 'Historic',
-  dataSources: ['hist_designated', 'crimeIncidents'],
+  dataSources: ['histDesignated', 'crimeIncidents'],
 
   components: [
     {
@@ -18,8 +18,8 @@ export default {
           {
             label: 'Historic District',
             value: function(state) {
-              if (state.sources.hist_designated.data[0].properties.DDESIGDATE) {
-                return state.sources.hist_designated.data[0].properties.DDESIGDATE;
+              if (state.sources.histDesignated.data[0].properties.DDESIGDATE) {
+                return state.sources.histDesignated.data[0].properties.DDESIGDATE;
               } else {
                 return "No date available."
               }
@@ -91,7 +91,7 @@ export default {
       slots: {
         title : 'Historic District Overlays',
         items: function(state) {
-          var data = state.sources['hist_designated'].data;
+          var data = state.sources['histDesignated'].data;
           var rows = data.map(function(row){
             var itemRow = row;
             return itemRow;

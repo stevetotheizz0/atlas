@@ -1,5 +1,5 @@
 export default {
-  key: 'schoolinfo',
+  key: 'schoolInfo',
   icon: 'school',
   label: 'Schools',
 
