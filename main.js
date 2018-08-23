@@ -92,13 +92,6 @@ function concatDorAddress(parcel, includeUnit) {
     return props[streetField];
   });
   comps = comps.map(cleanDorAttribute);
-      // TODO handle individual address comps (like mapping stex=2 => 1/2)
-      // addressLow = comps.HOUSE,
-      // addressHigh = comps.STEX,
-      // streetPredir = comps.STDIR,
-      // streetName = comps.STNAM,
-      // streetSuffix = comps.STDES,
-      // streetPostdir = comps.STDESSUF,
 
   // add address to front
   comps = [address].concat(comps);
