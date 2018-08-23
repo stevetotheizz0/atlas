@@ -18,4 +18,4 @@ deploy:
     secret_access_key: $AWS_SECRET_ACCESS_KEY
     bucket: 'atlas-dev2.phila.gov'
     on:
-      branch: develop2
+      branch: nonbundled
