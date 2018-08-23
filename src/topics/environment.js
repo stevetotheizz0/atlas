@@ -2,7 +2,7 @@ export default {
   key: 'environment',
   icon: 'leaf',
   label: 'Environment',
-  dataSources: [],
+  dataSources: ['watersheds'],
 
   components: [
     {
@@ -55,8 +55,8 @@ export default {
         fields: [
           {
             label: 'Water at this address drains into:',
-            value: function() {
-              return "Schuylkill River"
+            value: function(state) {
+              return state.sources.watersheds.data[0].properties.WATERSHED_NAME
             }
           },
           {
@@ -67,14 +67,12 @@ export default {
           },
           {
             label: 'Flood Risk',
-            value: function() {
-              return "Not in floodplain.";
-            }
-          },
-          {
-            label: 'Street Tree Density',
-            value: function() {
-              return "70%";
+            value: function(state) {
+              if (state.sources.floodplain.data.length > 0) {
+                return "Within 100-year floodplain."
+              } else {
+              return "Not in 100-year floodplain.";
+              }
             }
           },
         ]
@@ -93,4 +91,7 @@ export default {
   ],
   identifyFeature: 'address-marker',
   parcels: 'pwd',
+  featureLayers: [
+    'streetTrees'
+  ],
 };

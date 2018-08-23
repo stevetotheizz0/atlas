@@ -2,7 +2,7 @@ export default {
   key: 'business',
   icon: 'briefcase',
   label: 'Business',
-  dataSources: ['businessArea', 'redevelopmentArea'],
+  dataSources: ['businessArea', 'redevelopmentArea', 'tobacco','noVendingArea',  'specialVendingArea',],
 
   components: [
     {
@@ -88,8 +88,20 @@ export default {
           },
           {
             label: 'Street Vending',
-            value: function() {
-              return ("Prohibited")
+            value: function(state) {
+              if(state.sources.noVendingArea.data != null) {
+                if(state.sources.noVendingArea.data.length > 0) {
+                  return "Vending Prohibited Area"
+                } else {
+                  if(state.sources.specialVendingArea.data != null) {
+                    if(state.sources.specialVendingArea.data.length > 0) {
+                      return "Special District - <a>Click</a> for more info"
+                    }else {
+                      return "Eligible - Apply for a permit <a>here</a>"
+                    }
+                  }
+                }
+              }
             }
           },
         ]

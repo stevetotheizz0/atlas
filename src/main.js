@@ -50,6 +50,11 @@ import keystoneZone from './data-sources/keystone-zone';
 import redevelopmentArea from './data-sources/redevelopment-area';
 import tobacco from './data-sources/tobacco-free';
 import noVendingArea from './data-sources/vending-area';
+import specialVendingArea from './data-sources/vending-special';
+import neighConservation from './data-sources/neigh-conservation';
+import histDistrict from './data-sources/historic-distr';
+import watersheds from './data-sources/watersheds';
+import floodplain from './data-sources/floodplain'
 // unreleased data sources
 
 
@@ -89,8 +94,8 @@ if (hostname !== 'localhost' && !hostname.match(/(\d+\.){3}\d+/)) {
 // console.log('data source', dataSources);
 // console.log('data source', dataSources);
 
-var BASE_CONFIG_URL = 'https://cdn.rawgit.com/rbrtmrtn/mapboard-base-config/ef2a0bfcca48e3cb9c8922f27996dd5d543dc2fe/config.js';
-
+// var BASE_CONFIG_URL = 'https://cdn.rawgit.com/rbrtmrtn/mapboard-base-config/ef2a0bfcca48e3cb9c8922f27996dd5d543dc2fe/config.js';
+var BASE_CONFIG_URL = 'https://raw.githubusercontent.com/ajrothwell/mapboard-base-config/master/config.js';
 // configure accounting.js
 accounting.settings.currency.precision = 0;
 
@@ -116,7 +121,21 @@ mapboard({
     right: 0,
   },
   gatekeeperKey: helpers.GATEKEEPER_KEY,
-  map,
+  map: {
+    featureLayers: {
+      streetTrees: {
+        url: '//services.arcgis.com/fLeGjb7u4uXqeF9q/ArcGIS/rest/services/Philadelphia_Street_Trees/FeatureServer/0',
+        markerType: 'circleMarker',
+        color: 'green',
+        interactive: false,
+        fillColor: 'green',
+        fillOpacity: 0.5,
+        weight: 1,
+        radius: 6,
+        minZoom: 19,
+      },
+    }
+  },
   baseConfig: BASE_CONFIG_URL,
   parcels,
   imageOverlayGroups,
@@ -140,26 +159,29 @@ mapboard({
     dorCondoList,
     dorDocuments,
     // elections,
+    floodplain,
     histDesignated,
+    histDistrict,
     keystoneZone,
     liBusinessLicenses,
     liInspections,
     liPermits,
     liViolations,
     nearbyZoningAppeals,
+    neighConservation,
     noVendingArea,
     opa,
     rco,
     redevelopmentArea,
     regmaps,
+    specialVendingArea,
     tobacco,
     vacantIndicatorsPoints,
+    watersheds,
     zoningAppeals,
     zoningBase,
     zoningDocs,
     zoningOverlay,
-    // airquality,
-    historicNearby
   },
   topics: [
     property,
@@ -177,5 +199,13 @@ mapboard({
     trashDay,
     // politicalInfo,
     nearby
+  ],
+  components: [
+    {
+      type: 'topic-set',
+      options: {
+        defaultTopic: 'property'
+      }
+    },
   ],
 });
