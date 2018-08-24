@@ -125,6 +125,25 @@ function getVacancyText(state) {
 accounting.settings.currency.precision = 0;
 
 mapboard.default({
+  baseConfig: BASE_CONFIG_URL,
+  rootStyle: {
+    position: 'absolute',
+    bottom: 0,
+    top: '118px',
+    left: 0,
+    right: 0,
+  },
+  gatekeeperKey: GATEKEEPER_KEY,
+  router: {
+    enabled: true
+  },
+  geolocation: {
+    enabled: false
+  },
+  panels: [
+    'topics',
+    'map'
+  ],
   components: [
     {
       type: 'topic-set',
@@ -133,37 +152,7 @@ mapboard.default({
       }
     },
   ],
-  panels: [
-    'topics',
-    'map'
-  ],
-  addressInput: {
-    width: 415,
-    position: 'right',
-    autocompleteEnabled: false,
-    autocompleteMax: 15,
-    placeholder: 'Search the map',
-  },
-  router: {
-    enabled: true
-  },
-  geolocation: {
-    enabled: false
-  },
-  addressAutocomplete: {
-    enabled: true
-  },
-  rootStyle: {
-    position: 'absolute',
-    bottom: 0,
-    // top: '78px',
-    top: '118px',
-    left: 0,
-    right: 0,
-  },
-  gatekeeperKey: GATEKEEPER_KEY,
   map: {
-    // possibly should move to base config
     defaultBasemap: 'pwd',
     defaultIdentifyFeature: 'address-marker',
     imagery: {
@@ -173,7 +162,13 @@ mapboard.default({
       enabled: true
     },
   },
-  baseConfig: BASE_CONFIG_URL,
+  addressInput: {
+    width: 415,
+    position: 'right',
+    autocompleteEnabled: true,
+    autocompleteMax: 15,
+    placeholder: 'Search the map',
+  },
   parcels: {
     pwd: {
       multipleAllowed: false,
@@ -260,7 +255,7 @@ mapboard.default({
   pictometry: {
     enabled: true,
   },
-  greeting:{
+  greeting: {
     initialMessage: '\
       <h2>Atlas is your front door to the City of Philadelphia.</h2>\
       <p>Here are some things you can do with Atlas:</p>\
