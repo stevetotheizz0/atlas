@@ -2,6 +2,7 @@ export default {
   key: 'schoolInfo',
   icon: 'school',
   label: 'Schools',
+  dataSources: ['charterSchools'],
 
   components: [
     {
@@ -43,6 +44,167 @@ export default {
         ]
       }
     }, // end schgools table
+
+    {
+      type: 'horizontal-table',
+      options: {
+        topicKey: 'schoolinfo',
+        id: 'charterSchools',
+        // limit: 100,
+        sort: {
+          // this should return the val to sort on
+          getValue: function(item) {
+            return item._distance;
+          },
+          // asc or desc
+          order: 'asc'
+        },
+        fields: [
+          {
+            label: 'School Name',
+            value: function (state, item) {
+              return item.properties.FACILNAME_LABEL
+            }
+          },
+          {
+            label: 'Address',
+            value: function (state, item) {
+              return item.properties.FACIL_ADDRESS
+            }
+          },
+          {
+            label: 'Grades',
+            value: function (state, item) {
+              return item.properties.GRADE_ORG
+            }
+          },
+          {
+            label: 'Distance',
+            value: function(state, item) {
+              return parseInt(item._distance) + ' ft';
+            }
+          }
+        ],
+      },
+      slots: {
+        title: 'Nearby Citywide, Special Admission & Charter Schools',
+        data: 'charterSchools',
+        items: function(state) {
+          var data = state.sources['charterSchools'].data || [];
+          var rows = data.map(function(row){
+            var itemRow = row;
+            // var itemRow = Object.assign({}, row);
+            return itemRow;
+          });
+          return rows;
+        },
+      } // end of slots
+    },
+    {
+      type: 'horizontal-table',
+      options: {
+        fields: [],
+        externalLink: {
+          forceShow: true,
+          action: function() {
+            return 'See a complete list from the Philadelphia School District';
+          },
+          name: '',
+          href: function(state) {
+            // var address = state.geocode.data.properties.street_address;
+            // var addressEncoded = encodeURIComponent(address);
+            return '//www.philasd.org/directory/school-directory/';
+          }
+        }
+      },
+      slots: {
+      }
+    }, // end table
+    {
+      type: 'callout',
+      slots: {
+        text: '\
+          <a href="https://www.phila.gov/historical/designation/Pages/criteria.aspx" target="_blank">Community schools</a> \
+          are public schools where a full-time coordinator \
+          works with the entire school community to identify the community\'s \
+          most pressing needs.\
+        '
+      }
+    },
+    {
+      type: 'callout',
+      slots: {
+        text: '\
+          <a href="https://www.phila.gov/historical/designation/Pages/criteria.aspx" target="_blank">Friends Groups</a> \
+          are formed as a means to help facilitate the involvement and support of community memembers living \
+          within and near neighborhood school catchments.\
+        '
+      }
+    },
+    {
+      type: 'horizontal-table',
+      options: {
+        noCount: true,
+        fields: [],
+        externalLink: {
+          forceShow: true,
+          action: function() {
+            return 'Check if you are eligible for childcare or pre-K funding through PHL Pre-K';
+          },
+
+          href: function(state) {
+            // var address = state.geocode.data.properties.street_address;
+            // var addressEncoded = encodeURIComponent(address);
+            return '//www.phlprek.org/eligibility/';
+          }
+        },
+      },
+      slots: {
+        title: 'Pre-K and Childcare'
+      }
+    }, // end table
+    {
+      type: 'horizontal-table',
+      options: {
+        noCount: true,
+        fields: [],
+        externalLink: {
+          forceShow: true,
+          action: function() {
+            return 'Find after-school programs from Pre-K to high school.';
+          },
+
+          href: function(state) {
+            // var address = state.geocode.data.properties.street_address;
+            // var addressEncoded = encodeURIComponent(address);
+            return '//www.phillyasap.org/index.php/more/directorylisting';
+          }
+        },
+      },
+      slots: {
+        title: 'After-School Programs'
+      }
+    }, // end table
+    {
+      type: 'horizontal-table',
+      options: {
+        fields: [],
+        externalLink: {
+          forceShow: true,
+          action: function() {
+            return 'View a map of all Keyspot locations citywide';
+          },
+
+          href: function(state) {
+            // var address = state.geocode.data.properties.street_address;
+            // var addressEncoded = encodeURIComponent(address);
+            return '//www.phillykeyspots.org/keyspot-finder/';
+          }
+        },
+      },
+      slots: {
+      }
+    }, // end table
   ], // end comps
 
   basemap: 'pwd',

@@ -54,7 +54,13 @@ import specialVendingArea from './data-sources/vending-special';
 import neighConservation from './data-sources/neigh-conservation';
 import histDistrict from './data-sources/historic-distr';
 import watersheds from './data-sources/watersheds';
-import floodplain from './data-sources/floodplain'
+import floodplain from './data-sources/floodplain';
+import friendsGroup from './data-sources/friends-group';
+import charterSchools from './data-sources/charter-schools';
+import libraries from './data-sources/libraries';
+import bikeshare from './data-sources/bikeshare';
+import policeDistr from './data-sources/police-distr';
+import policePSA from './data-sources/police-psa';
 // unreleased data sources
 
 
@@ -74,7 +80,7 @@ import safetyInfo from './topics/publicsafety';
 // import politicalInfo from './topics/political';
 import trashDay from './topics/trash';
 import environment from './topics/environment';
-
+import recreation from './topics/recreation';
 
 // styles
 // TODO move all styles here (that have a npm package)
@@ -121,21 +127,7 @@ mapboard({
     right: 0,
   },
   gatekeeperKey: helpers.GATEKEEPER_KEY,
-  map: {
-    featureLayers: {
-      streetTrees: {
-        url: '//services.arcgis.com/fLeGjb7u4uXqeF9q/ArcGIS/rest/services/Philadelphia_Street_Trees/FeatureServer/0',
-        markerType: 'circleMarker',
-        color: 'green',
-        interactive: false,
-        fillColor: 'green',
-        fillOpacity: 0.5,
-        weight: 1,
-        radius: 6,
-        minZoom: 19,
-      },
-    }
-  },
+  map,
   baseConfig: BASE_CONFIG_URL,
   parcels,
   imageOverlayGroups,
@@ -152,7 +144,9 @@ mapboard({
   greeting,
   dataSources: {
     threeOneOneCarto,
+    bikeshare,
     businessArea,
+    charterSchools,
     condoList,
     crimeIncidents,
     divisions,
@@ -160,9 +154,11 @@ mapboard({
     dorDocuments,
     // elections,
     floodplain,
+    friendsGroup,
     histDesignated,
     histDistrict,
     keystoneZone,
+    libraries,
     liBusinessLicenses,
     liInspections,
     liPermits,
@@ -171,6 +167,8 @@ mapboard({
     neighConservation,
     noVendingArea,
     opa,
+    policeDistr,
+    policePSA,
     rco,
     redevelopmentArea,
     regmaps,
@@ -194,6 +192,7 @@ mapboard({
     business,
     historic,
     environment,
+    recreation,
     schoolInfo,
     safetyInfo,
     trashDay,

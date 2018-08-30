@@ -2,7 +2,7 @@ export default {
   key: 'environment',
   icon: 'leaf',
   label: 'Environment',
-  dataSources: ['watersheds'],
+  dataSources: ['watersheds', 'friendsGroup'],
 
   components: [
     {
@@ -88,6 +88,75 @@ export default {
         "
       }
     },
+    {
+      type: 'horizontal-table',
+      options: {
+        topicKey: 'environment',
+        id: 'friendsGroup',
+        // limit: 100,
+        sort: {
+          // this should return the val to sort on
+          getValue: function(item) {
+            return item.distance;
+          },
+          // asc or desc
+          order: 'asc'
+        },
+        fields: [
+          {
+            label: 'Friends Group',
+            value: function (state, item) {
+              return item.friendsnam
+            }
+          },
+          {
+            label: 'Park Address',
+            value: function (state, item) {
+              return item.parkaddres
+            }
+          },
+          {
+            label: 'Distance',
+            value: function(state, item) {
+              return parseInt(item.distance) + ' ft';
+            }
+          }
+        ],
+      },
+      slots: {
+        title: 'Befriend a Nearby Park',
+        data: 'friendsGroup',
+        items: function(state) {
+          var data = state.sources['friendsGroup'].data || [];
+          var rows = data.map(function(row){
+            var itemRow = row;
+            // var itemRow = Object.assign({}, row);
+            return itemRow;
+          });
+          return rows;
+        },
+      } // end of slots
+    },
+    {
+      type: 'horizontal-table',
+      options: {
+        fields: [],
+        externalLink: {
+          forceShow: true,
+          action: function() {
+            return 'See a full map of all green infrastructure projects citywide.';
+          },
+          name: '',
+          href: function(state) {
+            // var address = state.geocode.data.properties.street_address;
+            // var addressEncoded = encodeURIComponent(address);
+            return '//phl-water.maps.arcgis.com/apps/webappviewer/index.html?id=c5d43ba5291441dabbee5573a3f981d2';
+          }
+        }
+      },
+      slots: {
+      }
+    }, // end table
   ],
   identifyFeature: 'address-marker',
   parcels: 'pwd',
