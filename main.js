@@ -13,9 +13,8 @@
 //   console.log = console.info = console.debug = console.error = function () {};
 // }
 
+var BASE_CONFIG_URL = 'https://cdn.rawgit.com/ajrothwell/mapboard-base-config/252debf3c4089478419f78e4bdfe26486988d236/config.js';
 var GATEKEEPER_KEY = '82fe014b6575b8c38b44235580bc8b11';
-
-var BASE_CONFIG_URL = 'https://cdn.rawgit.com/rbrtmrtn/mapboard-base-config/11f9644110fa1d6ff8a198f206d17631c8981947/config.js';
 
 var ZONING_CODE_MAP = {
   'RSD-1': 'Residential Single Family Detached-1',
