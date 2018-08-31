@@ -1,4 +1,5 @@
 export default {
+  // REVIEW: Naming convention is just <topic> for topic keys e.g. 'school'
   key: 'schoolInfo',
   icon: 'school',
   label: 'Schools',

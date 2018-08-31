@@ -24,6 +24,7 @@ export default {
         fields: [
           {
             label: 'Nearby Library',
+            //REVIEW: add a fetch nearest function to http-client.js for reusability and separation instead of implementing the logic here 
             value: function(state) {
               let min = Math.min.apply(null, state.sources.libraries.data.map(function(item) {return item._distance;}));
               let result  = state.sources.libraries.data.filter(function(item){return item._distance == min;} );

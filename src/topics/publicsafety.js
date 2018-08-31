@@ -85,6 +85,7 @@ export default {
             label: 'Police Jurisdiction',
             value: function(state) {
               let mail = 'police.co_'+state.geocode.data.properties.police_district+'@phila.gov'
+              //bug below, always returns n"th"
               function nth(n) { return n + (["st","nd","rd"][((n+90)%100-10)%10-1]||"th")};
               return (nth(state.geocode.data.properties.police_district) + ' District <br>'
                       +'PSA '+ state.geocode.data.properties.police_service_area
