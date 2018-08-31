@@ -2,7 +2,7 @@ export default {
   key: 'safetyInfo',
   icon: 'star',
   label: 'Public Safety',
-  dataSources: ['policePSA', 'policeDistr'],
+  dataSources: ['policePSA', 'policeDistr', 'fireStation'],
 
   components: [
     {
@@ -97,13 +97,165 @@ export default {
           {
             label: 'Child Welfare',
             value: function(state) {
-              return "Sample Name of Turning Points Location\
-                      <br>";
+              return '<a target="_blank">Sample Name of Location</a>\
+                      <br>1234 Sample Address St, 19104\
+                      <br>(215) 555-5555\
+                      <br>To report child abuse or neglect call (215) 683-6100';
             },
           },
         ]
       }
     }, // end police table
+    {
+      type: 'horizontal-table',
+      options: {
+        noCount: true,
+        limit: 3,
+        sort: {
+          // this should return the val to sort on
+          getValue: function(item) {
+            return item.distance;
+          },
+          // asc or desc
+          order: 'asc'
+        },
+        fields: [
+          {
+            label: 'Station',
+            value: function (state, item) {
+              if (item.properties.ENG){
+                if(item.properties.LAD > 0) {
+                  return 'Engine '+ item.properties.ENG
+                         +' / Ladder '+ item.properties.LAD;
+                } else {
+                  return 'Engine '+ item.properties.ENG
+                }
+              } else {
+                if (item.properties.LAD > 0) {
+                  return 'Ladder '+ item.properties.LAD;
+                }
+              }
+            }
+          },
+          {
+            label: 'Location',
+            value: function(state, item) {
+              function titleCase(str) {
+                str = str.toLowerCase().split(' ').map(function(word) {
+                  return (word.charAt(0).toUpperCase() + word.slice(1));
+                });
+                return str.join(' ');
+              }
+              return titleCase(item.properties.LOCATION);
+            }
+          },
+          {
+            label: 'Distance',
+            value: function(state, item) {
+              return parseInt(item._distance/5280).toFixed(1) + ' miles';
+            }
+          },
+        ],
+        externalLink: {
+          forceShow: true,
+          action: function() {
+            return 'View all fire stations citywide';
+          },
+          name: '',
+          href: function(state) {
+            return '//www.phila.gov/services/safety-emergency-preparedness/fire-safety/find-a-fire-station/';
+          }
+        }
+      },
+      slots: {
+        title: 'Nearby Fire Stations',
+        data: 'fireStation',
+        items: function(state) {
+          var data = state.sources['fireStation'].data || [];
+          var rows = data.map(function(row){
+            var itemRow = row;
+            // var itemRow = Object.assign({}, row);
+            return itemRow;
+          });
+          return rows;
+        },
+      }, // end of slots
+    },
+    // {
+    //   type: 'horizontal-table',
+    //   options: {
+    //     topicKey: 'coolWarmSta',
+    //     id: 'coolWarmSta',
+    //     sort: {
+    //       // this should return the val to sort on
+    //       getValue: function(item) {
+    //         return item.distance;
+    //       },
+    //       // asc or desc
+    //       order: 'asc'
+    //     },
+    //     fields: [
+    //       {
+    //         label: 'Station',
+    //         value: function (state, item) {
+    //           if (item.properties.ENG){
+    //             if(item.properties.LAD > 0) {
+    //               return 'Engine '+ item.properties.ENG
+    //                      +' / Ladder '+ item.properties.LAD;
+    //             } else {
+    //               return 'Engine '+ item.properties.ENG
+    //             }
+    //           } else {
+    //             if (item.properties.LAD > 0) {
+    //               return 'Ladder '+ item.properties.LAD;
+    //             }
+    //           }
+    //         }
+    //       },
+    //       {
+    //         label: 'Location',
+    //         value: function(state, item) {
+    //           function titleCase(str) {
+    //             str = str.toLowerCase().split(' ').map(function(word) {
+    //               return (word.charAt(0).toUpperCase() + word.slice(1));
+    //             });
+    //             return str.join(' ');
+    //           }
+    //           return titleCase(item.properties.LOCATION);
+    //         }
+    //       },
+    //       {
+    //         label: 'Distance',
+    //         value: function(state, item) {
+    //           return parseInt(item._distance/5280).toFixed(1) + ' miles';
+    //         }
+    //       },
+    //     ],
+    //     externalLink: {
+    //       forceShow: true,
+    //       action: function() {
+    //         return 'View all fire stations citywide';
+    //       },
+    //       name: '',
+    //       href: function(state) {
+    //         return '//www.phila.gov/services/safety-emergency-preparedness/fire-safety/find-a-fire-station/';
+    //       }
+    //     }
+    //   },
+    //   slots: {
+    //     title: 'Nearby Fire Stations',
+    //     data: 'fireStation',
+    //     items: function(state) {
+    //       var data = state.sources['fireStation'].data || [];
+    //       var rows = data.map(function(row){
+    //         var itemRow = row;
+    //         // var itemRow = Object.assign({}, row);
+    //         return itemRow;
+    //       });
+    //       return rows;
+    //     },
+    //   }, // end of slots
+    // },
   ], // end comps
   basemap: 'pwd',
   dynamicMapLayers: [

@@ -61,6 +61,8 @@ import libraries from './data-sources/libraries';
 import bikeshare from './data-sources/bikeshare';
 import policeDistr from './data-sources/police-distr';
 import policePSA from './data-sources/police-psa';
+import fireStation from './data-sources/fire-station';
+import coolWarmSta from './data-sources/cooling-sta';
 // unreleased data sources
 
 
@@ -148,11 +150,13 @@ mapboard({
     businessArea,
     charterSchools,
     condoList,
+    coolWarmSta,
     crimeIncidents,
     divisions,
     dorCondoList,
     dorDocuments,
     // elections,
+    fireStation,
     floodplain,
     friendsGroup,
     histDesignated,
