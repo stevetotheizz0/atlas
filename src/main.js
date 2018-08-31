@@ -23,46 +23,46 @@ import greeting from './general/greeting';
 
 // data sources
 import threeOneOneCarto from './data-sources/311-carto';
+//import airquality from './data-sources/airquality';
+import bikeshare from './data-sources/bikeshare';
+import businessArea from './data-sources/business-area';
+import charterSchools from './data-sources/charter-schools';
 import condoList from './data-sources/condo-list';
+import coolWarmSta from './data-sources/cooling-sta';
 import crimeIncidents from './data-sources/crime-incidents';
 import divisions from './data-sources/divisions';
 import dorCondoList from './data-sources/dor-condo-list';
 import dorDocuments from './data-sources/dor-documents';
 import elections from './data-sources/elections';
+import fireStation from './data-sources/fire-station';
+import floodplain from './data-sources/floodplain';
+import friendsGroup from './data-sources/friends-group';
+import histDesignated from './data-sources/historic';
+import historicNearby from './data-sources/historic-nearby';
+import keystoneZone from './data-sources/keystone-zone';
+import histDistrict from './data-sources/historic-distr';
 import liBusinessLicenses from './data-sources/li-business-licenses';
 import liInspections from './data-sources/li-inspections';
 import liPermits from './data-sources/li-permits';
 import liViolations from './data-sources/li-violations';
+import libraries from './data-sources/libraries';
 import nearbyZoningAppeals from './data-sources/nearby-zoning-appeals';
+import neighConservation from './data-sources/neigh-conservation';
+import noVendingArea from './data-sources/vending-area';
 import opa from './data-sources/opa';
+import policeDistr from './data-sources/police-distr';
+import policePSA from './data-sources/police-psa';
 import rco from './data-sources/rco';
 import regmaps from './data-sources/regmaps';
+import redevelopmentArea from './data-sources/redevelopment-area';
+import specialVendingArea from './data-sources/vending-special';
+import tobacco from './data-sources/tobacco-free';
 import vacantIndicatorsPoints from './data-sources/vacant-indicator-points';
+import watersheds from './data-sources/watersheds';
 import zoningAppeals from './data-sources/zoning-appeals';
 import zoningBase from './data-sources/zoning-base';
 import zoningDocs from './data-sources/zoning-docs';
 import zoningOverlay from './data-sources/zoning-overlay';
-//import airquality from './data-sources/airquality';
-import histDesignated from './data-sources/historic';
-import historicNearby from './data-sources/historic-nearby';
-import businessArea from './data-sources/business-area';
-import keystoneZone from './data-sources/keystone-zone';
-import redevelopmentArea from './data-sources/redevelopment-area';
-import tobacco from './data-sources/tobacco-free';
-import noVendingArea from './data-sources/vending-area';
-import specialVendingArea from './data-sources/vending-special';
-import neighConservation from './data-sources/neigh-conservation';
-import histDistrict from './data-sources/historic-distr';
-import watersheds from './data-sources/watersheds';
-import floodplain from './data-sources/floodplain';
-import friendsGroup from './data-sources/friends-group';
-import charterSchools from './data-sources/charter-schools';
-import libraries from './data-sources/libraries';
-import bikeshare from './data-sources/bikeshare';
-import policeDistr from './data-sources/police-distr';
-import policePSA from './data-sources/police-psa';
-import fireStation from './data-sources/fire-station';
-import coolWarmSta from './data-sources/cooling-sta';
 // unreleased data sources
 
 
@@ -77,8 +77,8 @@ import polling from './topics/polling';
 import nearby from './topics/nearby';
 import historic from './topics/historic';
 import business from './topics/business';
-import schoolInfo from './topics/schoolinfo';
-import safetyInfo from './topics/publicsafety';
+import schools from './topics/schools';
+import safety from './topics/publicsafety';
 // import politicalInfo from './topics/political';
 import trashDay from './topics/trash';
 import environment from './topics/environment';
@@ -197,8 +197,8 @@ mapboard({
     historic,
     environment,
     recreation,
-    schoolInfo,
-    safetyInfo,
+    schools,
+    safety,
     trashDay,
     // politicalInfo,
     nearby

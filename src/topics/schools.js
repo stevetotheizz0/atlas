@@ -1,6 +1,5 @@
 export default {
-  // REVIEW: Naming convention is just <topic> for topic keys e.g. 'school'
-  key: 'schoolInfo',
+  key: 'schools',
   icon: 'school',
   label: 'Schools',
   dataSources: ['charterSchools'],

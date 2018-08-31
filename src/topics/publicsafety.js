@@ -1,5 +1,5 @@
 export default {
-  key: 'safetyInfo',
+  key: 'safety',
   icon: 'star',
   label: 'Public Safety',
   dataSources: ['policePSA', 'policeDistr', 'fireStation'],
@@ -85,8 +85,7 @@ export default {
             label: 'Police Jurisdiction',
             value: function(state) {
               let mail = 'police.co_'+state.geocode.data.properties.police_district+'@phila.gov'
-              //bug below, always returns n"th"
-              function nth(n) { return n + (["st","nd","rd"][((n+90)%100-10)%10-1]||"th")};
+              function nth(n){return n + ([,'st','nd','rd'][n%100>>3^1&&n%10]||'th')};
               return (nth(state.geocode.data.properties.police_district) + ' District <br>'
                       +'PSA '+ state.geocode.data.properties.police_service_area
                       +'<br> <a target="_blank"> PSA Leader Email Link</a>'
@@ -153,7 +152,7 @@ export default {
           {
             label: 'Distance',
             value: function(state, item) {
-              return parseInt(item._distance/5280).toFixed(1) + ' miles';
+              return (item._distance/5280).toFixed(1) + ' miles';
             }
           },
         ],
@@ -182,81 +181,159 @@ export default {
         },
       }, // end of slots
     },
-    // {
-    //   type: 'horizontal-table',
-    //   options: {
-    //     topicKey: 'coolWarmSta',
-    //     id: 'coolWarmSta',
-    //     sort: {
-    //       // this should return the val to sort on
-    //       getValue: function(item) {
-    //         return item.distance;
-    //       },
-    //       // asc or desc
-    //       order: 'asc'
-    //     },
-    //     fields: [
-    //       {
-    //         label: 'Station',
-    //         value: function (state, item) {
-    //           if (item.properties.ENG){
-    //             if(item.properties.LAD > 0) {
-    //               return 'Engine '+ item.properties.ENG
-    //                      +' / Ladder '+ item.properties.LAD;
-    //             } else {
-    //               return 'Engine '+ item.properties.ENG
-    //             }
-    //           } else {
-    //             if (item.properties.LAD > 0) {
-    //               return 'Ladder '+ item.properties.LAD;
-    //             }
-    //           }
-    //         }
-    //       },
-    //       {
-    //         label: 'Location',
-    //         value: function(state, item) {
-    //           function titleCase(str) {
-    //             str = str.toLowerCase().split(' ').map(function(word) {
-    //               return (word.charAt(0).toUpperCase() + word.slice(1));
-    //             });
-    //             return str.join(' ');
-    //           }
-    //           return titleCase(item.properties.LOCATION);
-    //         }
-    //       },
-    //       {
-    //         label: 'Distance',
-    //         value: function(state, item) {
-    //           return parseInt(item._distance/5280).toFixed(1) + ' miles';
-    //         }
-    //       },
-    //     ],
-    //     externalLink: {
-    //       forceShow: true,
-    //       action: function() {
-    //         return 'View all fire stations citywide';
-    //       },
-    //       name: '',
-    //       href: function(state) {
-    //         return '//www.phila.gov/services/safety-emergency-preparedness/fire-safety/find-a-fire-station/';
-    //       }
-    //     }
-    //   },
-    //   slots: {
-    //     title: 'Nearby Fire Stations',
-    //     data: 'fireStation',
-    //     items: function(state) {
-    //       var data = state.sources['fireStation'].data || [];
-    //       var rows = data.map(function(row){
-    //         var itemRow = row;
-    //         // var itemRow = Object.assign({}, row);
-    //         return itemRow;
-    //       });
-    //       return rows;
-    //     },
-    //   }, // end of slots
-    // },
+
+
+    {
+      type: 'horizontal-table',
+      options: {
+        sort: {
+          // this should return the val to sort on
+          getValue: function(item) {
+            return item.distance;
+          },
+          // asc or desc
+          order: 'asc'
+        },
+        fields: [
+          {
+            label: 'Station',
+            value: function (state, item) {
+              return item.properties.Name
+            }
+          },
+          {
+            label: 'Location',
+            value: function(state, item) {
+              function titleCase(str) {
+                str = str.toLowerCase().split(' ').map(function(word) {
+                  return (word.charAt(0).toUpperCase() + word.slice(1));
+                });
+                return str.join(' ');
+              }
+              return titleCase(item.properties.Address);
+            }
+          },
+          {
+            label: 'Contact',
+            value: function (state, item) {
+              return item.properties.Number
+            }
+          },
+          {
+            label: 'Hours',
+            value: function (state, item) {
+              return item.properties.Hours
+            }
+          },
+          {
+            label: 'Distance',
+            value: function(state, item) {
+              return (item._distance/5280).toFixed(1) + ' miles';
+            }
+          },
+        ],
+        externalLink: {
+          forceShow: true,
+          action: function() {
+            return 'View a map of all cooling and warming centers citywide';
+          },
+          name: '',
+          href: function(state) {
+            return '//phl.maps.arcgis.com/apps/webappviewer/index.html?id=0afe8e198cd84da6a51ca4af027a7056';
+          }
+        }
+      },
+      slots: {
+        title: 'Nearby Cooling and Warming Centers',
+        data: 'fireStation',
+        items: function(state) {
+          var data = state.sources['coolWarmSta'].data || [];
+          var rows = data.map(function(row){
+            var itemRow = row;
+            // var itemRow = Object.assign({}, row);
+            return itemRow;
+          });
+          return rows;
+        },
+      }, // end of slots
+    },
+    {
+      type: 'horizontal-table',
+      // REVIEW: This area is still in work.
+      topicKey: 'safety',
+      id: 'trafficDetours',
+      options: {
+        sort: {
+          // this should return the val to sort on
+          getValue: function(item) {
+            return item.distance;
+          },
+          // asc or desc
+          order: 'asc'
+        },
+        fields: [
+          {
+            label: 'Station',
+            value: function (state, item) {
+              return item.properties.Name
+            }
+          },
+          {
+            label: 'Location',
+            value: function(state, item) {
+              function titleCase(str) {
+                str = str.toLowerCase().split(' ').map(function(word) {
+                  return (word.charAt(0).toUpperCase() + word.slice(1));
+                });
+                return str.join(' ');
+              }
+              return titleCase(item.properties.Address);
+            }
+          },
+          {
+            label: 'Contact',
+            value: function (state, item) {
+              return item.properties.Number
+            }
+          },
+          {
+            label: 'Hours',
+            value: function (state, item) {
+              return item.properties.Hours
+            }
+          },
+          {
+            label: 'Distance',
+            value: function(state, item) {
+              return (item._distance/5280).toFixed(1) + ' miles';
+            }
+          },
+        ],
+        externalLink: {
+          forceShow: true,
+          action: function() {
+            return 'See citywide traffic alerts from the Philadelphia Police Dept';
+          },
+          name: '',
+          href: function(state) {
+            return '//pr.phillypolice.com/category/traffic-alerts/';
+          }
+        }
+      },
+      slots: {
+        title: 'Upcoming Traffic Detours',
+        data: 'fireStation',
+        items: function(state) {
+          var data = state.sources['coolWarmSta'].data || [];
+          var rows = data.map(function(row){
+            var itemRow = row;
+            // var itemRow = Object.assign({}, row);
+            return itemRow;
+          });
+          return rows;
+        },
+      }, // end of slots
+    },
   ], // end comps
   basemap: 'pwd',
   dynamicMapLayers: [
